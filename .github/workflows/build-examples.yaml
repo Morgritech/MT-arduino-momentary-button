@@ -1,0 +1,25 @@
+name: Build examples
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  static-check:
+    name: Build examples
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compile examples
+        uses: arduino/compile-sketches@v1
+        with:
+          libraries: |
+            # Install the repository as a library.
+            - source-path: ./
+            # Library dependencies are installed automatically via library.properties
+          sketch-paths: |
+            - examples

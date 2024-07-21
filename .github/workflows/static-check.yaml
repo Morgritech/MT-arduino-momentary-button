@@ -1,0 +1,22 @@
+name: Static check
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  static-check:
+    name: Static check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Arduino lint
+        uses: arduino/arduino-lint-action@v1
+        with:
+          compliance: specification
+          library-manager: submit
+          project-type: library
