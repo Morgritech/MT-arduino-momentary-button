@@ -20,6 +20,7 @@ jobs:
           libraries: |
             # Install the repository as a library.
             - source-path: ./
-            # Library dependencies are installed automatically via library.properties
+            # Other library dependencies.
+            - name: MT-arduino-pin-debouncer
           sketch-paths: |
             - examples
