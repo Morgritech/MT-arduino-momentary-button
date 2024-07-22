@@ -6,21 +6,28 @@
 # Datatypes (KEYWORD1)
 ######################################################
 
-TBC	KEYWORD1
-TBC	KEYWORD1
-TBD	KEYWORD1
+MomentaryButton	KEYWORD1
+PressType	KEYWORD1
+PinState	KEYWORD1
+ButtonState	KEYWORD1
 
 ######################################################
 # Methods and Functions (KEYWORD2)
 ######################################################
 
-TBC	KEYWORD2
+DetectStateChange	KEYWORD2
+DetectPressType	KEYWORD2
+CountPresses	KEYWORD2
 
 ######################################################
 # Constants (LITERAL1)
 ######################################################
 
-kTBC	LITERAL1
-kTBC	LITERAL1
-kTBC	LITERAL1
-kTBC	LITERAL1
+kNotApplicable	LITERAL1
+kShortPress	LITERAL1
+kLongPress	LITERAL1
+kLow	LITERAL1
+kHigh	LITERAL1
+kReleased	LITERAL1
+kPressed	LITERAL1
+kNoChange	LITERAL1

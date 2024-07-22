@@ -1,14 +1,16 @@
 # MT-arduino-momentary-button
 
-Momentary button library for the Arduino platform, to detect button state change (press/release), short/long presses and to count the number of presses.
+[![Static check](https://github.com/Morgritech/MT-arduino-momentary-button/actions/workflows/static-check.yaml/badge.svg)](https://github.com/Morgritech/MT-arduino-momentary-button/actions/workflows/static-check.yaml) [![Build examples](https://github.com/Morgritech/MT-arduino-momentary-button/actions/workflows/build-examples.yaml/badge.svg)](https://github.com/Morgritech/MT-arduino-momentary-button/actions/workflows/build-examples.yaml)
 
-This library implements non-blocking functions to detect button actions. The library can handle multiple buttons.
+Momentary button library for the Arduino platform, to detect button state change (press/release), short/long presses and multiple presses.
+
+This library implements non-blocking functions to detect button actions, ensuring each action is debounced to filter out input noise on the button pin. The library can handle multiple buttons.
 
 Button actions that can be detected include:
 
 - State change i.e., button press and release.
 - Short press and long press (press and hold).
-- Multiple (short) presses; obtained via a press counter.
+- Multiple (short) presses; obtained via a press counter. This will count each short press that occurs within an allowed period of time (set using the library).
 
 See the "examples" folder for how to get started on using the library.
 

@@ -3,8 +3,8 @@
 // Licensed under GNU General Public License v3.0 (GPLv3) License.
 // See the LICENSE file in the project root for full license details.
 
-/// @file detect-button-state-change.ino
-/// @brief Example showing how to detect button state change (press and release) using the MT-arduino-momentary-button library.
+/// @file detect-multiple-button-presses.ino
+/// @brief Example showing how to detect multiple (short) button presses using the MT-arduino-momentary-button library.
 
 #include <momentary_button.h>
 
@@ -14,10 +14,12 @@ const uint8_t kButtonPin = 2;
 const mt::MomentaryButton::PinState kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
 /// @brief The Period of time in milliseconds (ms) for debouncing the button pin.
 const uint16_t kButtonDebouncePeriod = 20;
+/// @brief The Period in of time milliseconds (ms) allowed between multiple (short) button presses.
+const uint16_t kMultiplePressPeriod = 600;
 
 /// @brief The Momentary Button instance for the button.
-mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState); // Default value of 70 ms is used for the debounce period.
+mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod, kMultiplePressPeriod);
+//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod); // Default value of 500 ms is used for the multiple press period.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;
@@ -35,20 +37,11 @@ void setup() {
 
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
-  // Counter to keep track of each unique state change (pressed-released).
-  static int counter = 0;
+  uint8_t button_press_count = push_button.CountPresses(); // This must be called periodically.
 
-  // Detect state change on the button pin.
-  mt::MomentaryButton::ButtonState button_state = push_button.DetectStateChange(); // This must be called periodically.
-
-  if (button_state == mt::MomentaryButton::ButtonState::kPressed) {
-    counter++;
+  if (button_press_count > 0) {
     Serial.print("Button pressed ");
-    Serial.println(counter);
-  }
-
-  if (button_state == mt::MomentaryButton::ButtonState::kReleased) {
-    Serial.print("Button released ");
-    Serial.println(counter);
+    Serial.print(button_press_count);
+    Serial.println(" times");
   }
 }

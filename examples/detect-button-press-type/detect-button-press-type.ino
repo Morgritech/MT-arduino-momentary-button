@@ -8,7 +8,22 @@
 
 #include <momentary_button.h>
 
-/// @brief The serial communication speed for the Arduino board.
+/// @brief Button pin.
+const uint8_t kButtonPin = 2;
+/// @brief The pin state when the button is not pressed.
+const mt::MomentaryButton::PinState kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
+/// @brief The Period of time in milliseconds (ms) for debouncing the button pin.
+const uint16_t kButtonDebouncePeriod = 20;
+/// @brief The Period in of time milliseconds (ms) allowed between multiple button presses.
+const uint16_t kMultiplePressPeriod = 600;
+/// @brief The Period in of time milliseconds (ms) required for a long button press (press and hold).
+const uint16_t kLongPressPeriod = 1200;
+
+/// @brief The Momentary Button instance for the button.
+mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod, kMultiplePressPeriod, kLongPressPeriod);
+//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod); // Default value of 1000 ms is used for the long press period.
+
+/// @brief The serial communication speed.
 const int kBaudRate = 9600;
 
 /// @brief The main application entry point for initialisation tasks.
@@ -16,12 +31,21 @@ void setup() {
   // Initialise the Serial Port.
   Serial.begin(kBaudRate);
 
-
+  // Initialise the button pin as an input.
+  pinMode(kButtonPin, INPUT);
 
   Serial.println("\n...Setup complete...\n");
 }
 
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
+  mt::MomentaryButton::PressType button_press_type = push_button.DetectPressType(); // This must be called periodically.
 
+  if (button_press_type == mt::MomentaryButton::PressType::kShortPress) {
+    Serial.println("Short press");
+  }
+
+  if (button_press_type == mt::MomentaryButton::PressType::kLongPress) {
+    Serial.println("Long press");
+  }
 }

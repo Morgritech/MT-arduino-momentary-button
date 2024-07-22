@@ -14,7 +14,8 @@
 
 namespace mt {
 
-MomentaryButton::MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state, uint16_t debounce_period, uint16_t multiple_press_period, uint16_t long_press_period)
+MomentaryButton::MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state, uint16_t debounce_period,
+                                 uint16_t multiple_press_period, uint16_t long_press_period)
     : button_debouncer_(gpio_pin, debounce_period) {
   gpio_pin_ = gpio_pin;
   unpressed_pin_state_ = unpressed_pin_state;
