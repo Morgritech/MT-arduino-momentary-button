@@ -15,3 +15,5 @@ Button actions that can be detected include:
 See the "examples" folder for how to get started on using the library.
 
 The library requires the [MT-arduino-pin-debouncer](https://github.com/Morgritech/MT-arduino-pin-debouncer) library.
+
+This library can be installed via the Arduino Library Manager.
