@@ -60,7 +60,7 @@ MomentaryButton::ButtonState MomentaryButton::DetectStateChange() const {
 }
 
 MomentaryButton::PressType MomentaryButton::DetectPressType() const {
-  static uint32_t reference_button_press_time = millis(); // (ms).
+  static uint64_t reference_button_press_time = millis(); // (ms).
 
   PressType press_type = PressType::kNotApplicable;
   ButtonState button_state = DetectStateChange();
@@ -85,7 +85,7 @@ MomentaryButton::PressType MomentaryButton::DetectPressType() const {
 }
 
 uint8_t MomentaryButton::CountPresses() const {
-  static uint32_t reference_button_press_time = millis(); // (ms).
+  static uint64_t reference_button_press_time = millis(); // (ms).
   static uint8_t press_counter = 0;
 
   uint8_t press_count = 0;
