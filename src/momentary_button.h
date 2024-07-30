@@ -51,15 +51,15 @@ class MomentaryButton {
   /// @brief Destroy the Button object.
   ~MomentaryButton();
 
-  /// @brief Check if the button has changed state, and what state it has changed to.
-  /// @return The button state at the time of checking (released, pressed, or no change).
+  /// @brief Check if the button has changed state, and what state it has changed to. This must be called periodically.
+  /// @return The button state at the time of checking.
   ButtonState DetectStateChange() const;
 
-  /// @brief Check if a button has been pressed, and what type of press occurred.
+  /// @brief Check if a button has been pressed, and what type of press occurred. This must be called periodically.
   /// @return The type of button press at the time of checking.
   PressType DetectPressType() const;
 
-  /// @brief Count the number of (short) button presses.
+  /// @brief Count the number of (short) button presses. This must be called periodically.
   /// @return The number of (short) button presses.
   uint8_t CountPresses() const;
 
