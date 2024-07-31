@@ -78,7 +78,7 @@ MomentaryButton::PressType MomentaryButton::DetectPressType() const {
       press_type = PressType::kShortPress;
     }
     
-    reference_button_press_time = millis();
+    reference_button_press_time_ms = millis();
   }
   
   return press_type;
