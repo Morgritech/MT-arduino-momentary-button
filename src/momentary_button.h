@@ -45,23 +45,23 @@ class MomentaryButton {
   /// @param debounce_period The period of time (ms) allowed for pin debouncing.
   /// @param multiple_press_period The period of time (ms) allowed between multiple button presses.
   /// @param long_press_period The period of time (ms) required for a long button press (press and hold).
-  MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state = PinState::kLow, uint16_t debounce_period = 70,
-                  uint16_t multiple_press_period = 500, uint16_t long_press_period = 1000);
+  MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state = PinState::kLow, uint16_t debounce_period_ms = 70,
+                  uint16_t multiple_press_period_ms = 500, uint16_t long_press_period_ms = 1000);
 
   /// @brief Destroy the Button object.
   ~MomentaryButton();
 
-  /// @brief Check if the button has changed state, and what state it has changed to. This must be called periodically.
+  /// @brief Check if the button has changed state, and what state it has changed to.
   /// @return The button state at the time of checking.
-  ButtonState DetectStateChange() const;
+  ButtonState DetectStateChange() const; ///< This must be called periodically.
 
-  /// @brief Check if a button has been pressed, and what type of press occurred. This must be called periodically.
+  /// @brief Check if a button has been pressed, and what type of press occurred.
   /// @return The type of button press at the time of checking.
-  PressType DetectPressType() const;
+  PressType DetectPressType() const; ///< This must be called periodically.
 
-  /// @brief Count the number of (short) button presses. This must be called periodically.
+  /// @brief Count the number of (short) button presses.
   /// @return The number of (short) button presses.
-  uint8_t CountPresses() const;
+  uint8_t CountPresses() const; ///< This must be called periodically.
 
  private:
 
@@ -70,9 +70,9 @@ class MomentaryButton {
   /// @brief The pin state when the button is not pressed.
   PinState unpressed_pin_state_;
   /// @brief The period of time (ms) allowed between multiple button presses.
-  uint16_t multiple_press_period_;
+  uint16_t multiple_press_period_ms_;
   /// @brief The period of time (ms) required for a long button press (press and hold).
-  uint16_t long_press_period_;
+  uint16_t long_press_period_ms_;
   /// @brief A pin debouncer object to handle button debouncing.
   PinDebouncer button_debouncer_;
 };
