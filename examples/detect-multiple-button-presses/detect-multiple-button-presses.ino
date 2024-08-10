@@ -37,6 +37,7 @@ void setup() {
 
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
+  // Count (short) presses on the button.
   uint8_t button_press_count = push_button.CountPresses(); // This must be called periodically.
 
   if (button_press_count > 0) {

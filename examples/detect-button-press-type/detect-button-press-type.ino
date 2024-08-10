@@ -39,6 +39,7 @@ void setup() {
 
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
+  // Detect button press type.
   mt::MomentaryButton::PressType button_press_type = push_button.DetectPressType(); // This must be called periodically.
 
   if (button_press_type == mt::MomentaryButton::PressType::kShortPress) {
