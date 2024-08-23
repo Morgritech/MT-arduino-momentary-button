@@ -25,87 +25,79 @@ MomentaryButton::MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state,
 
 MomentaryButton::~MomentaryButton() {}
 
-MomentaryButton::ButtonState MomentaryButton::DetectStateChange() const {
-  static PinDebouncer::Status debounce_status = PinDebouncer::Status::kNotStarted;
-  static bool debouncing_a_press = false;
-
+MomentaryButton::ButtonState MomentaryButton::DetectStateChange() {
   ButtonState button_state = ButtonState::kNoChange;
 
-  if (debounce_status == PinDebouncer::Status::kNotStarted && debouncing_a_press == false) {
+  if (debounce_status_ == PinDebouncer::Status::kNotStarted && debouncing_a_press_ == false) {
     // No button press yet and/or finished debouncing button release.
     PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_));
     if (pin_state != unpressed_pin_state_) {
       // Button has been pressed.
       button_state = ButtonState::kPressed;
-      debouncing_a_press = true;
-      debounce_status = PinDebouncer::Status::kOngoing;
+      debouncing_a_press_ = true;
+      debounce_status_ = PinDebouncer::Status::kOngoing;
     }
   }
-  else if (debounce_status == PinDebouncer::Status::kNotStarted && debouncing_a_press == true) {
+  else if (debounce_status_ == PinDebouncer::Status::kNotStarted && debouncing_a_press_ == true) {
     // Finished debouncing a button press.
     PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_));
     if (pin_state == unpressed_pin_state_) {
       // Button has been released.
       button_state = ButtonState::kReleased;
-      debouncing_a_press = false;
-      debounce_status = PinDebouncer::Status::kOngoing;
+      debouncing_a_press_ = false;
+      debounce_status_ = PinDebouncer::Status::kOngoing;
     }
   }
   
-  if (debounce_status == PinDebouncer::Status::kOngoing) {
-    debounce_status = button_debouncer_.DebouncePin();
+  if (debounce_status_ == PinDebouncer::Status::kOngoing) {
+    debounce_status_ = button_debouncer_.DebouncePin();
   }
 
   return button_state;
 }
 
-MomentaryButton::PressType MomentaryButton::DetectPressType() const {
-  static uint64_t reference_button_press_time_ms = millis(); // (ms).
-
+MomentaryButton::PressType MomentaryButton::DetectPressType() {
   PressType press_type = PressType::kNotApplicable;
   ButtonState button_state = DetectStateChange();
 
   if (button_state == ButtonState::kPressed) {
-    reference_button_press_time_ms = millis();
+    reference_press_type_time_ms_ = millis();
   }
 
   if (button_state == ButtonState::kReleased) {
 
-    if ((millis() - reference_button_press_time_ms) >= long_press_period_ms_) {
+    if ((millis() - reference_press_type_time_ms_) >= long_press_period_ms_) {
       press_type = PressType::kLongPress;
     }
     else {
       press_type = PressType::kShortPress;
     }
     
-    reference_button_press_time_ms = millis();
+    reference_press_type_time_ms_ = millis();
   }
   
   return press_type;
 }
 
-uint8_t MomentaryButton::CountPresses() const {
-  static uint64_t reference_button_press_time_ms = millis(); // (ms).
-  static uint8_t press_counter = 0;
-
+uint8_t MomentaryButton::CountPresses() {
   uint8_t press_count = 0;
 
   PressType press_type = DetectPressType();
 
   if (press_type == PressType::kShortPress) {
     
-    if (press_counter == 0 || (millis() - reference_button_press_time_ms) <= multiple_press_period_ms_) {
-      press_counter++;
-      press_count = press_counter;
-      reference_button_press_time_ms = millis();
+    if (press_counter_ == 0 || (millis() - reference_multiple_press_time_ms_) <= multiple_press_period_ms_) {
+      press_counter_++;
+      press_count = press_counter_;
+      reference_multiple_press_time_ms_ = millis();
     }
     else {
-      press_counter = 0;
+      press_counter_ = 0;
     }
 
   }
-  else if ((millis() - reference_button_press_time_ms) > multiple_press_period_ms_) {
-    press_counter = 0;
+  else if ((millis() - reference_multiple_press_time_ms_) > multiple_press_period_ms_) {
+    press_counter_ = 0;
   }
   
   return press_count;
