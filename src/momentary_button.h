@@ -53,15 +53,15 @@ class MomentaryButton {
 
   /// @brief Check if the button has changed state, and what state it has changed to.
   /// @return The button state at the time of checking.
-  ButtonState DetectStateChange() const; ///< This must be called periodically.
+  ButtonState DetectStateChange(); ///< This must be called periodically.
 
   /// @brief Check if a button has been pressed, and what type of press occurred.
   /// @return The type of button press at the time of checking.
-  PressType DetectPressType() const; ///< This must be called periodically.
+  PressType DetectPressType(); ///< This must be called periodically.
 
   /// @brief Count the number of (short) button presses.
   /// @return The number of (short) button presses.
-  uint8_t CountPresses() const; ///< This must be called periodically.
+  uint8_t CountPresses(); ///< This must be called periodically.
 
  private:
 
@@ -75,6 +75,16 @@ class MomentaryButton {
   uint16_t long_press_period_ms_;
   /// @brief A pin debouncer object to handle button debouncing.
   PinDebouncer button_debouncer_;
+  /// @brief The status of the debounce operation.
+  PinDebouncer::Status debounce_status_ = PinDebouncer::Status::kNotStarted;
+  /// @brief Flag to keep track of when the debounce of a button press is ongoing.
+  bool debouncing_a_press_ = false;
+  /// @brief Reference time (ms) for detecting a button press type.
+  uint64_t reference_press_type_time_ms_;
+  /// @brief Reference time (ms) for detecting multiple button presses.
+  uint64_t reference_multiple_press_time_ms_;
+  /// @brief Counter to keep track of multiple button presses.
+  uint8_t press_counter_ = 0;
 };
 
 } // namespace mt
