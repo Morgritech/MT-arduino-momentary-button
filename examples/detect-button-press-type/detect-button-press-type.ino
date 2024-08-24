@@ -34,7 +34,7 @@ void setup() {
   // Initialise the button pin as an input.
   pinMode(kButtonPin, INPUT);
 
-  Serial.println("\n...Setup complete...\n");
+  Serial.println(F("\n...Setup complete...\n"));
 }
 
 /// @brief The continuously running function for repetitive tasks.
@@ -43,10 +43,10 @@ void loop() {
   mt::MomentaryButton::PressType button_press_type = push_button.DetectPressType(); // This must be called periodically.
 
   if (button_press_type == mt::MomentaryButton::PressType::kShortPress) {
-    Serial.println("Short press");
+    Serial.println(F("Short press"));
   }
 
   if (button_press_type == mt::MomentaryButton::PressType::kLongPress) {
-    Serial.println("Long press");
+    Serial.println(F("Long press"));
   }
 }
