@@ -30,7 +30,7 @@ void setup() {
   // Initialise the button pin as an input.
   pinMode(kButtonPin, INPUT);
 
-  Serial.println("\n...Setup complete...\n");
+  Serial.println(F("\n...Setup complete...\n"));
 }
 
 /// @brief The continuously running function for repetitive tasks.
@@ -43,12 +43,12 @@ void loop() {
 
   if (button_state == mt::MomentaryButton::ButtonState::kPressed) {
     counter++;
-    Serial.print("Button pressed ");
+    Serial.print(F("Button pressed "));
     Serial.println(counter);
   }
 
   if (button_state == mt::MomentaryButton::ButtonState::kReleased) {
-    Serial.print("Button released ");
+    Serial.print(F("Button released "));
     Serial.println(counter);
   }
 }

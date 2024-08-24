@@ -32,7 +32,7 @@ void setup() {
   // Initialise the button pin as an input.
   pinMode(kButtonPin, INPUT);
 
-  Serial.println("\n...Setup complete...\n");
+  Serial.println(F("\n...Setup complete...\n"));
 }
 
 /// @brief The continuously running function for repetitive tasks.
@@ -41,8 +41,8 @@ void loop() {
   uint8_t button_press_count = push_button.CountPresses(); // This must be called periodically.
 
   if (button_press_count > 0) {
-    Serial.print("Button pressed ");
+    Serial.print(F("Button pressed "));
     Serial.print(button_press_count);
-    Serial.println(" times");
+    Serial.println(F(" times"));
   }
 }
