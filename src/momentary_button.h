@@ -19,13 +19,6 @@ namespace mt {
 class MomentaryButton {
  public:
 
-  /// @brief Enum of button press types.
-  enum class PressType {
-    kNotApplicable = 0,
-    kShortPress,
-    kLongPress,
-  };
-
   /// @brief Enum of GPIO pin states.
   enum class PinState {
     kLow = 0,
@@ -37,6 +30,19 @@ class MomentaryButton {
     kReleased = 0,
     kPressed,
     kNoChange,
+  };
+
+  /// @brief Enum of button press types.
+  enum class PressType {
+    kNotApplicable = 0,
+    kShortPress,
+    kLongPress,
+  };
+
+  /// @brief Enum of long press options.
+  enum class LongPressOption {
+    kDetectWhileHolding = 1,
+    kDetectAfterRelease,
   };
 
   /// @brief Construct a Button object.
@@ -63,6 +69,10 @@ class MomentaryButton {
   /// @return The number of (short) button presses.
   uint8_t CountPresses(); ///< This must be called periodically.
 
+  /// @brief Set the option for detecting a long press.
+  /// @param long_press_option The long press option.
+  void set_long_press_option(LongPressOption long_press_option);
+
  private:
 
   /// @brief The GPIO input pin assigned to the button.
@@ -73,12 +83,16 @@ class MomentaryButton {
   uint16_t multiple_press_period_ms_;
   /// @brief The period of time (ms) required for a long button press (press and hold).
   uint16_t long_press_period_ms_;
+  /// @brief The option for long press detection.
+  LongPressOption long_press_option_ = LongPressOption::kDetectAfterRelease;
   /// @brief A pin debouncer object to handle button debouncing.
   PinDebouncer button_debouncer_;
-  /// @brief The status of the debounce operation.
+  /// @brief The status of the debounce operation during state change detection.
   PinDebouncer::Status debounce_status_ = PinDebouncer::Status::kNotStarted;
-  /// @brief Flag to keep track of when the debounce of a button press is ongoing.
+  /// @brief Flag to keep track of when the debounce of a button press is ongoing during state change detection.
   bool debouncing_a_press_ = false;
+  /// @brief Flag to keep track of when a button has been pressed during press type detection.
+  bool waiting_for_release_ = false;
   /// @brief Reference time (ms) for detecting a button press type.
   uint64_t reference_press_type_time_ms_;
   /// @brief Reference time (ms) for detecting multiple button presses.

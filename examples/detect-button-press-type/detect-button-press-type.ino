@@ -18,6 +18,8 @@ const uint16_t kButtonDebouncePeriod_ms = 20;
 const uint16_t kMultiplePressPeriod_ms = 600;
 /// @brief The Period in of time milliseconds (ms) required for a long button press (press and hold).
 const uint16_t kLongPressPeriod_ms = 1200;
+/// @brief The option for detecting a long press.
+const mt::MomentaryButton::LongPressOption kLongPressOption = mt::MomentaryButton::LongPressOption::kDetectWhileHolding;
 
 /// @brief The Momentary Button instance for the button.
 mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms);
@@ -33,6 +35,10 @@ void setup() {
 
   // Initialise the button pin as an input.
   pinMode(kButtonPin, INPUT);
+
+  // Set the long press option.
+  // If this is not set, the default behaviour is to detect a long press after the button is released.
+  push_button.set_long_press_option(kLongPressOption);
 
   Serial.println(F("\n...Setup complete...\n"));
 }
