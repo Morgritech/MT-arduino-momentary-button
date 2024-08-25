@@ -112,7 +112,7 @@ uint8_t MomentaryButton::CountPresses() {
   return press_count;
 }
 
-void long_press_option(LongPressOption long_press_option) {
+void MomentaryButton::set_long_press_option(LongPressOption long_press_option) {
   long_press_option_ = long_press_option;
 }
 

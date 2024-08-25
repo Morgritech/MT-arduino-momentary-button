@@ -71,7 +71,7 @@ class MomentaryButton {
 
   /// @brief Set the option for detecting a long press.
   /// @param long_press_option The long press option.
-  void long_press_option(LongPressOption long_press_option);
+  void set_long_press_option(LongPressOption long_press_option);
 
  private:
 

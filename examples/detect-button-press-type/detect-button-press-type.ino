@@ -38,7 +38,7 @@ void setup() {
 
   // Set the long press option.
   // If this is not set, the default behaviour is to detect a long press after the button is released.
-  push_button.long_press_option(kLongPressOption);
+  push_button.set_long_press_option(kLongPressOption);
 
   Serial.println(F("\n...Setup complete...\n"));
 }
