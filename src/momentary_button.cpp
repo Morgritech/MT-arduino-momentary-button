@@ -62,20 +62,30 @@ MomentaryButton::PressType MomentaryButton::DetectPressType() {
 
   if (button_state == ButtonState::kPressed) {
     reference_press_type_time_ms_ = millis();
+    waiting_for_release_ = true;
   }
 
   if (button_state == ButtonState::kReleased) {
-
     if ((millis() - reference_press_type_time_ms_) >= long_press_period_ms_) {
-      press_type = PressType::kLongPress;
+      // Long press.
+      if (long_press_option_ == LongPressOption::kDetectAfterRelease) {
+        press_type = PressType::kLongPress;
+      }
     }
     else {
       press_type = PressType::kShortPress;
     }
     
-    reference_press_type_time_ms_ = millis();
+    waiting_for_release_ = false;
   }
-  
+
+  if ((waiting_for_release_ == true) && (long_press_option_ == LongPressOption::kDetectWhileHolding)) {
+    if ((millis() - reference_press_type_time_ms_) >= long_press_period_ms_) {
+      press_type = PressType::kLongPress;
+      waiting_for_release_ = false;
+    }
+  }
+
   return press_type;
 }
 
@@ -85,7 +95,6 @@ uint8_t MomentaryButton::CountPresses() {
   PressType press_type = DetectPressType();
 
   if (press_type == PressType::kShortPress) {
-    
     if (press_counter_ == 0 || (millis() - reference_multiple_press_time_ms_) <= multiple_press_period_ms_) {
       press_counter_++;
       press_count = press_counter_;
@@ -101,6 +110,10 @@ uint8_t MomentaryButton::CountPresses() {
   }
   
   return press_count;
+}
+
+void long_press_option(LongPressOption long_press_option) {
+  long_press_option_ = long_press_option;
 }
 
 } // namespace mt
