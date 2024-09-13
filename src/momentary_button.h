@@ -76,7 +76,7 @@ class MomentaryButton {
  private:
 
   /// @brief The GPIO input pin assigned to the button.
-  uint8_t gpio_pin_;
+  uint16_t gpio_pin_;
   /// @brief The pin state when the button is not pressed.
   PinState unpressed_pin_state_;
   /// @brief The period of time (ms) allowed between multiple button presses.
@@ -94,9 +94,9 @@ class MomentaryButton {
   /// @brief Flag to keep track of when a button has been pressed during press type detection.
   bool waiting_for_release_ = false;
   /// @brief Reference time (ms) for detecting a button press type.
-  uint64_t reference_press_type_time_ms_;
+  uint64_t reference_press_type_time_ms_ = 0;
   /// @brief Reference time (ms) for detecting multiple button presses.
-  uint64_t reference_multiple_press_time_ms_;
+  uint64_t reference_multiple_press_time_ms_ = 0;
   /// @brief Counter to keep track of multiple button presses.
   uint8_t press_counter_ = 0;
 };
