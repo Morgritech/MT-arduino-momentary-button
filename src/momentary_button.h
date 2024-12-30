@@ -59,15 +59,15 @@ class MomentaryButton {
 
   /// @brief Check if the button has changed state, and what state it has changed to.
   /// @return The button state at the time of checking.
-  ButtonState DetectStateChange(); ///< This must be called periodically.
+  ButtonState DetectStateChange(); ///< This must be called repeatedly.
 
   /// @brief Check if a button has been pressed, and what type of press occurred.
   /// @return The type of button press at the time of checking.
-  PressType DetectPressType(); ///< This must be called periodically.
+  PressType DetectPressType(); ///< This must be called repeatedly.
 
   /// @brief Count the number of (short) button presses.
   /// @return The number of (short) button presses.
-  uint8_t CountPresses(); ///< This must be called periodically.
+  uint8_t CountPresses(); ///< This must be called repeatedly.
 
   /// @brief Set the option for detecting a long press.
   /// @param long_press_option The long press option.
