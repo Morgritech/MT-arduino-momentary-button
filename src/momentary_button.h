@@ -51,7 +51,7 @@ class MomentaryButton {
   /// @param debounce_period_ms The period of time (ms) allowed for pin debouncing.
   /// @param multiple_press_period_ms The period of time (ms) allowed between multiple button presses.
   /// @param long_press_period_ms The period of time (ms) required for a long button press (press and hold).
-  MomentaryButton(uint8_t gpio_pin, PinState unpressed_pin_state = PinState::kLow, uint16_t debounce_period_ms = 70,
+  MomentaryButton(uint16_t gpio_pin, PinState unpressed_pin_state = PinState::kLow, uint16_t debounce_period_ms = 70,
                   uint16_t multiple_press_period_ms = 500, uint16_t long_press_period_ms = 1000);
 
   /// @brief Destroy the Button object.
