@@ -16,7 +16,7 @@ Other features:
 
 - Long presses can be detected either upon release of the button, or, while the button is being held and the set period has elapsed.
 
-See the "examples" folder for how to get started on using the library.
+See the [examples](examples) folder for how to get started on using the library.
 
 The library requires the [MT-arduino-pin-debouncer](https://github.com/Morgritech/MT-arduino-pin-debouncer) library.
 
