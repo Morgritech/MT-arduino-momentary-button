@@ -19,7 +19,7 @@ const uint16_t kMultiplePressPeriod_ms = 600;
 
 /// @brief The Momentary Button instance for the button.
 mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod); // Default value of 500 ms is used for the multiple press period.
+//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;
@@ -38,7 +38,7 @@ void setup() {
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
   // Count (short) presses on the button.
-  uint8_t button_press_count = push_button.CountPresses(); // This must be called periodically.
+  uint8_t button_press_count = push_button.CountPresses(); // This must be called repeatedly.
 
   if (button_press_count > 0) {
     Serial.print(F("Button pressed "));

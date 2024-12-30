@@ -23,7 +23,7 @@ const mt::MomentaryButton::LongPressOption kLongPressOption = mt::MomentaryButto
 
 /// @brief The Momentary Button instance for the button.
 mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default value of 1000 ms is used for the long press period.
+//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms, long press period = 1000 ms.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;
@@ -46,7 +46,7 @@ void setup() {
 /// @brief The continuously running function for repetitive tasks.
 void loop() {
   // Detect button press type.
-  mt::MomentaryButton::PressType button_press_type = push_button.DetectPressType(); // This must be called periodically.
+  mt::MomentaryButton::PressType button_press_type = push_button.DetectPressType(); // This must be called repeatedly.
 
   if (button_press_type == mt::MomentaryButton::PressType::kShortPress) {
     Serial.println(F("Short press"));

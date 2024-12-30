@@ -17,7 +17,7 @@ const uint16_t kButtonDebouncePeriod_ms = 20;
 
 /// @brief The Momentary Button instance for the button.
 mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState); // Default value of 70 ms is used for the debounce period.
+//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState); // Default values: debounce period = 70 ms.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;
@@ -39,7 +39,7 @@ void loop() {
   static int counter = 0;
 
   // Detect state change on the button pin.
-  mt::MomentaryButton::ButtonState button_state = push_button.DetectStateChange(); // This must be called periodically.
+  mt::MomentaryButton::ButtonState button_state = push_button.DetectStateChange(); // This must be called repeatedly.
 
   if (button_state == mt::MomentaryButton::ButtonState::kPressed) {
     counter++;
