@@ -11,13 +11,13 @@
 /// @brief Button pin.
 const uint8_t kButtonPin = 2;
 /// @brief The pin state when the button is not pressed.
-const mt::MomentaryButton::PinState kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
+const auto kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
 /// @brief The Period of time in milliseconds (ms) for debouncing the button pin.
 const uint16_t kButtonDebouncePeriod_ms = 20;
 
 /// @brief The Momentary Button instance for the button.
-mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState); // Default values: debounce period = 70 ms.
+auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms);
+//auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState); // Default values: debounce period = 70 ms.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;

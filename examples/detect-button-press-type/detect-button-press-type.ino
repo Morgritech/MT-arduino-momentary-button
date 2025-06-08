@@ -11,7 +11,7 @@
 /// @brief Button pin.
 const uint8_t kButtonPin = 2;
 /// @brief The pin state when the button is not pressed.
-const mt::MomentaryButton::PinState kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
+const auto kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
 /// @brief The Period of time in milliseconds (ms) for debouncing the button pin.
 const uint16_t kButtonDebouncePeriod_ms = 20;
 /// @brief The Period in of time milliseconds (ms) allowed between multiple button presses.
@@ -19,11 +19,11 @@ const uint16_t kMultiplePressPeriod_ms = 600;
 /// @brief The Period in of time milliseconds (ms) required for a long button press (press and hold).
 const uint16_t kLongPressPeriod_ms = 1200;
 /// @brief The option for detecting a long press.
-const mt::MomentaryButton::LongPressOption kLongPressOption = mt::MomentaryButton::LongPressOption::kDetectWhileHolding;
+const auto kLongPressOption = mt::MomentaryButton::LongPressOption::kDetectWhileHolding;
 
 /// @brief The Momentary Button instance for the button.
-mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms);
-//mt::MomentaryButton push_button(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms, long press period = 1000 ms.
+auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms);
+//auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms, long press period = 1000 ms.
 
 /// @brief The serial communication speed.
 const int kBaudRate = 9600;
