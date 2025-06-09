@@ -9,20 +9,20 @@
 #include <momentary_button.h>
 
 /// @brief Button pin.
-const uint8_t kButtonPin = 2;
+constexpr uint8_t kButtonPin = 2;
 /// @brief The pin state when the button is not pressed.
-const auto kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
+constexpr auto kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
 /// @brief The Period of time in milliseconds (ms) for debouncing the button pin.
-const uint16_t kButtonDebouncePeriod_ms = 20;
+constexpr uint16_t kButtonDebouncePeriod_ms = 20;
 /// @brief The Period in of time milliseconds (ms) allowed between multiple (short) button presses.
-const uint16_t kMultiplePressPeriod_ms = 600;
+constexpr uint16_t kMultiplePressPeriod_ms = 600;
 
 /// @brief The Momentary Button instance for the button.
 auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms);
 //auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms.
 
 /// @brief The serial communication speed.
-const int kBaudRate = 9600;
+constexpr int kBaudRate = 9600;
 
 /// @brief The main application entry point for initialisation tasks.
 void setup() {
