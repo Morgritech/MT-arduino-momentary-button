@@ -22,8 +22,8 @@ constexpr uint16_t kLongPressPeriod_ms = 1200;
 constexpr auto kLongPressOption = mt::MomentaryButton::LongPressOption::kDetectWhileHolding;
 
 /// @brief The Momentary Button instance for the button.
-auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms);
-//auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms, long press period = 1000 ms.
+mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms, kLongPressPeriod_ms};
+//mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms}; // Default values: multiple press period = 500 ms, long press period = 1000 ms.
 
 /// @brief The serial communication speed.
 constexpr int kBaudRate = 9600;

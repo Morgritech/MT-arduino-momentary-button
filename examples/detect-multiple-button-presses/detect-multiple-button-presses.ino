@@ -18,8 +18,8 @@ constexpr uint16_t kButtonDebouncePeriod_ms = 20;
 constexpr uint16_t kMultiplePressPeriod_ms = 600;
 
 /// @brief The Momentary Button instance for the button.
-auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms);
-//auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms); // Default values: multiple press period = 500 ms.
+mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms, kMultiplePressPeriod_ms};
+//mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms}; // Default values: multiple press period = 500 ms.
 
 /// @brief The serial communication speed.
 constexpr int kBaudRate = 9600;

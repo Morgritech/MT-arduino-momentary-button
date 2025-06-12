@@ -16,8 +16,8 @@ constexpr auto kUnpressedPinState = mt::MomentaryButton::PinState::kLow;
 constexpr uint16_t kButtonDebouncePeriod_ms = 20;
 
 /// @brief The Momentary Button instance for the button.
-auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms);
-//auto push_button = mt::MomentaryButton(kButtonPin, kUnpressedPinState); // Default values: debounce period = 70 ms.
+mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState, kButtonDebouncePeriod_ms};
+//mt::MomentaryButton push_button{kButtonPin, kUnpressedPinState}; // Default values: debounce period = 70 ms.
 
 /// @brief The serial communication speed.
 constexpr int kBaudRate = 9600;
