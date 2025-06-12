@@ -30,8 +30,7 @@ MomentaryButton::ButtonState MomentaryButton::DetectStateChange() {
 
   if (debounce_status_ == PinDebouncer::Status::kNotStarted && debouncing_a_press_ == false) {
     // No button press yet and/or finished debouncing button release.
-    PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_));
-    if (pin_state != unpressed_pin_state_) {
+    if (PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_)); pin_state != unpressed_pin_state_) {
       // Button has been pressed.
       button_state = ButtonState::kPressed;
       debouncing_a_press_ = true;
@@ -40,8 +39,7 @@ MomentaryButton::ButtonState MomentaryButton::DetectStateChange() {
   }
   else if (debounce_status_ == PinDebouncer::Status::kNotStarted && debouncing_a_press_ == true) {
     // Finished debouncing a button press.
-    PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_));
-    if (pin_state == unpressed_pin_state_) {
+    if (PinState pin_state = static_cast<PinState>(digitalRead(gpio_pin_)); pin_state == unpressed_pin_state_) {
       // Button has been released.
       button_state = ButtonState::kReleased;
       debouncing_a_press_ = false;
@@ -92,9 +90,7 @@ MomentaryButton::PressType MomentaryButton::DetectPressType() {
 uint8_t MomentaryButton::CountPresses() {
   uint8_t press_count = 0;
 
-  PressType press_type = DetectPressType();
-
-  if (press_type == PressType::kShortPress) {
+  if (PressType press_type = DetectPressType(); press_type == PressType::kShortPress) {
     if (press_counter_ == 0 || (millis() - reference_multiple_press_time_ms_) <= multiple_press_period_ms_) {
       press_counter_++;
       press_count = press_counter_;
@@ -103,7 +99,6 @@ uint8_t MomentaryButton::CountPresses() {
     else {
       press_counter_ = 0;
     }
-
   }
   else if ((millis() - reference_multiple_press_time_ms_) > multiple_press_period_ms_) {
     press_counter_ = 0;

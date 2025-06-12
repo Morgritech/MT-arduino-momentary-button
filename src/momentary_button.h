@@ -20,27 +20,27 @@ class MomentaryButton {
  public:
 
   /// @brief Enum of GPIO pin states.
-  enum class PinState {
+  enum class PinState : uint8_t {
     kLow = 0,
     kHigh,
   };
 
   /// @brief Enum of button states.
-  enum class ButtonState {
+  enum class ButtonState : uint8_t {
     kReleased = 0,
     kPressed,
     kNoChange,
   };
 
   /// @brief Enum of button press types.
-  enum class PressType {
+  enum class PressType : uint8_t {
     kNotApplicable = 0,
     kShortPress,
     kLongPress,
   };
 
   /// @brief Enum of long press options.
-  enum class LongPressOption {
+  enum class LongPressOption : uint8_t {
     kDetectWhileHolding = 1,
     kDetectAfterRelease,
   };
